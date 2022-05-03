@@ -40,8 +40,16 @@ export default function Main(): JSX.Element {
 
   const handleVoteDog = async (link:string) => {
     const breed = getBreed(link)
-    if (allBreeds.includes(breed)){
+    if (checkDogInDataBaseDogs(breed)){
       await axios.put(`https://git.heroku.com/tichnozar-dog-voting-app.git/breeds/${id}`, {currentVote: 90})
+    }
+  }
+
+  function checkDogInDataBaseDogs(breed: string){
+    for (let dogObject of dataBaseDogs){
+      if(dogObject.dogbreed === breed){
+        return true
+      }
     }
   }
 
