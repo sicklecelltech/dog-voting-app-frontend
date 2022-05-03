@@ -4,11 +4,19 @@ import { config } from "dotenv";
 import DogInterface from "./DogInterface";
 import getBreed from "../utils/getBreed";
 
+interface DataBaseDogs {
+  id: number,
+  dogbreed: string,
+  vote: number,
+  time: string
+}
+
 export default function Main(): JSX.Element {
   const [dog1, setDog1] = useState<DogInterface>({ message: "", status: "" });
   const [dog2, setDog2] = useState<DogInterface>({ message: "", status: "" });
+  const [dataBaseDogs, setDataBaseDogs] = useState<DataBaseDogs[]>([])
 
-  let allBreeds = [];
+
 
   useEffect(() => {
     const fetchDog1 = async () => {
@@ -21,13 +29,20 @@ export default function Main(): JSX.Element {
       const jsonBody: DogInterface = await response.json();
       setDog2(jsonBody);
     };
+    const getDataBaseDogs = async () => {
+      const data: DataBaseDogs[] = await axios.get('https://git.heroku.com/tichnozar-dog-voting-app.git/breeds')
+      setDataBaseDogs(data)
+    }
     fetchDog1();
     fetchDog2();
+    getDataBaseDogs()
   }, []);
 
-  const handleVoteDog = (link:string) => {
+  const handleVoteDog = async (link:string) => {
     const breed = getBreed(link)
-    
+    if (allBreeds.includes(breed)){
+      await axios.put(`https://git.heroku.com/tichnozar-dog-voting-app.git/breeds/${id}`, {currentVote: 90})
+    }
   }
 
   return (
