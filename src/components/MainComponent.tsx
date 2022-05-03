@@ -15,6 +15,7 @@ export default function Main(): JSX.Element {
   const [dog1, setDog1] = useState<DogInterface>({ message: "", status: "" });
   const [dog2, setDog2] = useState<DogInterface>({ message: "", status: "" });
   const [dataBaseDogs, setDataBaseDogs] = useState<DataBaseDogs[]>([])
+  const [id, setId] = useState<number>()
 
 
 
