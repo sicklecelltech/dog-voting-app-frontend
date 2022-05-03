@@ -19,6 +19,7 @@ export default function Main(): JSX.Element {
 
 
 
+
   useEffect(() => {
     const fetchDog1 = async () => {
       const response = await fetch("https://dog.ceo/api/breeds/image/random");
@@ -42,14 +43,17 @@ export default function Main(): JSX.Element {
   const handleVoteDog = async (link:string) => {
     const breed = getBreed(link)
     if (checkDogInDataBaseDogs(breed)){
-
-      // await axios.put(`https://git.heroku.com/tichnozar-dog-voting-app.git/breeds/${id}`, {currentVote: 90})
+      await axios.put(`https://git.heroku.com/tichnozar-dog-voting-app.git/breeds/${id}`, {currentVote: 90})
+      //discuss vote tomorrow morning 
+    }else {
+      await axios.post('https://git.heroku.com/tichnozar-dog-voting-app.git/breeds', {dogbreed: breed})
     }
   }
 
   function checkDogInDataBaseDogs(breed: string){
-    for (let dogObject of dataBaseDogs){
+    for (const dogObject of dataBaseDogs){
       if(dogObject.dogbreed === breed){
+        setId(dogObject.id)
         return true
       }
     }
