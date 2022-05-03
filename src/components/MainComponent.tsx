@@ -30,7 +30,7 @@ export default function Main(): JSX.Element {
       setDog2(jsonBody);
     };
     const getDataBaseDogs = async () => {
-      const data: DataBaseDogs[] = await axios.get('https://git.heroku.com/tichnozar-dog-voting-app.git/breeds')
+      const data: DataBaseDogs[] = await axios.get('https://tichnozar-dog-voting-app.herokuapp.com/breeds')
       setDataBaseDogs(data)
     }
     fetchDog1();
@@ -41,7 +41,8 @@ export default function Main(): JSX.Element {
   const handleVoteDog = async (link:string) => {
     const breed = getBreed(link)
     if (checkDogInDataBaseDogs(breed)){
-      await axios.put(`https://git.heroku.com/tichnozar-dog-voting-app.git/breeds/${id}`, {currentVote: 90})
+
+      // await axios.put(`https://git.heroku.com/tichnozar-dog-voting-app.git/breeds/${id}`, {currentVote: 90})
     }
   }
 
