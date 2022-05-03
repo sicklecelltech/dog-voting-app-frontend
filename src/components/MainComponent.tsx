@@ -1,6 +1,3 @@
-export default function Main ():JSX.Element{
-    return(
-        <>
-        </>
-    )
+export default function Main(): JSX.Element {
+  return <></>;
 }
