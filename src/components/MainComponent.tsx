@@ -66,8 +66,8 @@ export default function Main(): JSX.Element {
 
   return (
     <>
-    <h1>🐶Your Favourite Dog App🐶</h1>
-      <h3>Click on your favourite dog to vote!</h3>
+    <h1 className="main-title">🐶Your Favourite Dog App🐶</h1>
+      <h3 className="vote-prompt">Click on your favourite dog to vote!</h3>
       <div className="dogs-container">
         <img
           className="dog"
@@ -82,8 +82,8 @@ export default function Main(): JSX.Element {
           alt="doggie number 2"
         />
       </div>
-      <div>
-        <h3>Leaderboard</h3>
+      <div className="leaderboard-container">
+        <h3 className="leaderboard-title">Leaderboard</h3>
         <table>
           {" "}
           <tr>
