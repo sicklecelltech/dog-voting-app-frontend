@@ -14,7 +14,12 @@ body{
     border: 5px solid #C8AB83;
     margin: 20px;
     border-radius: 10px;
-    box-shadow: 5px 10px 20px #332109;;
+    box-shadow: 5px 10px 20px #332109;
+    transition: transform .07s;
+}
+
+.dog:hover{
+ transform: scale(1.1);
 }
 
 
