@@ -43,9 +43,12 @@ export default function Main(): JSX.Element {
         `https://tichnozar-dog-voting-app.herokuapp.com/breeds/${id}`,
         { currentVote: vote }
       );
-      }else { 
-        await axios.post('https://tichnozar-dog-voting-app.herokuapp.com/breeds', {dogbreed: breed})
-      }
+    } else {
+      await axios.post(
+        "https://tichnozar-dog-voting-app.herokuapp.com/breeds",
+        { dogbreed: breed }
+      );
+    }
   };
 
   console.log(dataBaseDogs);
@@ -62,16 +65,16 @@ export default function Main(): JSX.Element {
 
   return (
     <>
-        <h3>Click on your favourite dog to vote!</h3>
-        <div className="dogs-container">
+      <h3>Click on your favourite dog to vote!</h3>
+      <div className="dogs-container">
         <img
-          className="dog"  
+          className="dog"
           src={dog1.message}
           onClick={() => handleVoteDog(dog1.message)}
           alt="doggie number 1"
         />
         <img
-          className="dog" 
+          className="dog"
           src={dog2.message}
           onClick={() => handleVoteDog(dog2.message)}
           alt="doggie number 2"
