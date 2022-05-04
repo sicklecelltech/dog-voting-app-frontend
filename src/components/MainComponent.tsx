@@ -2,14 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { config } from "dotenv";
 import DogInterface from "./DogInterface";
+import DataBaseDogs from "./DatabaseDogInterface";
 import getBreed from "../utils/getBreed";
 
-interface DataBaseDogs {
-  id: number,
-  dogbreed: string,
-  vote: number,
-  time: string
-}
 
 export default function Main(): JSX.Element {
   const [dog1, setDog1] = useState<DogInterface>({ message: "", status: "" });
