@@ -11,6 +11,7 @@ export default function Main(): JSX.Element {
   const [id, setId] = useState<number>();
   const [toggle, setToggle] = useState<boolean>(false);
   const [vote, setVote] = useState<number>();
+  const [userVote, setUserVote] = useState<number>(0);
 
   useEffect(() => {
     const fetchDog1 = async () => {
@@ -38,6 +39,8 @@ export default function Main(): JSX.Element {
 
   const handleVoteDog = async (link: string) => {
     setToggle(!toggle);
+    setUserVote(userVote + 1);
+    console.log(userVote);
     const breed = getBreed(link);
     if (checkDogInDataBaseDogs(breed)) {
       await axios.put(
@@ -84,6 +87,7 @@ export default function Main(): JSX.Element {
       </div>
       <h3 className="leaderboard-title">Leaderboard</h3>
       <div className="leaderboard-container">
+        <p className="vote-counter">{`Number of votes you have cast: ${userVote}`}</p>
         <table>
           {" "}
           <tr>
