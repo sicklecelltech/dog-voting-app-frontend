@@ -26,7 +26,7 @@ body{
     background-color: #EEC584;
     padding: 10px;
     width: fit-content;
-    margin: auto;
+    margin: 20px auto;
     border-radius: 5px;
     border: 2.5px solid #C8AB83;
 }
@@ -48,9 +48,19 @@ body{
 
 .leaderboard-container{
     background-color: #EEC584;
+    width: 60%;
+    padding: 30px;
+    border-radius: 10px;
+    border: 2.5px solid #C8AB83;
+    margin: auto;
 }
 
 table, td {
     border: 1px solid;
-    width: 50%;
+    width: 90%;
+    color: #33250f;
+    background-color: #e9d7bf;
+    font-size: 20px;
+    margin: auto;
+    border-radius: 2px;
   }
