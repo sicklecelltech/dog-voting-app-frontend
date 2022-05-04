@@ -33,6 +33,7 @@ export default function Main(): JSX.Element {
     fetchDog1();
     fetchDog2();
     getDataBaseDogs();
+    // eslint-disable-next-line
   }, [toggle]);
 
   const handleVoteDog = async (link: string) => {
