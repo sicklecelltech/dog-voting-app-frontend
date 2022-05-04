@@ -28,7 +28,7 @@ export default function Main(): JSX.Element {
         "https://tichnozar-dog-voting-app.herokuapp.com/breeds"
       );
       setDataBaseDogs(response.data);
-      console.log(dataBaseDogs)
+      console.log(dataBaseDogs);
     };
     fetchDog1();
     fetchDog2();
@@ -44,13 +44,13 @@ export default function Main(): JSX.Element {
         `https://tichnozar-dog-voting-app.herokuapp.com/breeds/${id}`,
         { currentVote: vote }
       );
-      console.log('this is a put req')
+      console.log("this is a put req");
     } else {
       await axios.post(
         "https://tichnozar-dog-voting-app.herokuapp.com/breeds",
         { dogbreed: breed }
       );
-      console.log('this is a post req')
+      console.log("this is a post req");
     }
   };
 
@@ -66,7 +66,7 @@ export default function Main(): JSX.Element {
 
   return (
     <>
-    <h1 className="main-title">🐶Your Favourite Dog App🐶</h1>
+      <h1 className="main-title">🐶Your Favourite Dog App🐶</h1>
       <h3 className="vote-prompt">Click on your favourite dog to vote!</h3>
       <div className="dogs-container">
         <img
@@ -90,12 +90,14 @@ export default function Main(): JSX.Element {
             <th>Dog Breed</th>
             <th>Votes</th>
           </tr>
-          {dataBaseDogs.map((dog) => (
-            <tr key={dog.id}>
-              <td>{dog.dogbreed}</td>
-              <td>{dog.vote}</td>
-            </tr>
-          )).slice(0,9)}
+          {dataBaseDogs
+            .map((dog) => (
+              <tr key={dog.id}>
+                <td>{dog.dogbreed}</td>
+                <td>{dog.vote}</td>
+              </tr>
+            ))
+            .slice(0, 9)}
         </table>
       </div>
     </>
