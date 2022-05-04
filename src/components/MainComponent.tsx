@@ -65,6 +65,7 @@ export default function Main(): JSX.Element {
 
   return (
     <>
+    <h1>🐶Your Favourite Dog App🐶</h1>
       <h3>Click on your favourite dog to vote!</h3>
       <div className="dogs-container">
         <img
