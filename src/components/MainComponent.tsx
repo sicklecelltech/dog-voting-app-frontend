@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { config } from "dotenv";
 import DogInterface from "./DogInterface";
 import DataBaseDogs from "./DatabaseDogInterface";
 import getBreed from "../utils/getBreed";
@@ -67,26 +66,32 @@ export default function Main(): JSX.Element {
     <>
       <div>
         <h3>Click on your favourite dog to vote!</h3>
-        <img src={dog1.message} onClick={() => handleVoteDog(dog1.message)} />
-        <img src={dog2.message} onClick={() => handleVoteDog(dog2.message)} />
+        <img
+          src={dog1.message}
+          onClick={() => handleVoteDog(dog1.message)}
+          alt="doggie number 1"
+        />
+        <img
+          src={dog2.message}
+          onClick={() => handleVoteDog(dog2.message)}
+          alt="doggie number 2"
+        />
       </div>
       <div>
         <h3>Leaderboard</h3>
-          <table>
-            {" "}
-            <tr>
-              <th>Dog Breed</th>
-              <th>Vote</th>
-            </tr>
-        
-            {dataBaseDogs.map((dog) => (
-                <tr key={dog.id}>
+        <table>
+          {" "}
+          <tr>
+            <th>Dog Breed</th>
+            <th>Vote</th>
+          </tr>
+          {dataBaseDogs.map((dog) => (
+            <tr key={dog.id}>
               <td>{dog.dogbreed}</td>
               <td>{dog.vote}</td>
-              </tr>
-            ))}
-
-          </table>
+            </tr>
+          ))}
+        </table>
       </div>
     </>
   );
