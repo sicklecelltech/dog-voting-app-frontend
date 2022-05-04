@@ -82,7 +82,7 @@ export default function Main(): JSX.Element {
           alt="doggie number 2"
         />
       </div>
-     <h3 className="leaderboard-title">Leaderboard</h3>
+      <h3 className="leaderboard-title">Leaderboard</h3>
       <div className="leaderboard-container">
         <table>
           {" "}
