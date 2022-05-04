@@ -16,9 +16,7 @@ export default function Main(): JSX.Element {
   const [dog2, setDog2] = useState<DogInterface>({ message: "", status: "" });
   const [dataBaseDogs, setDataBaseDogs] = useState<DataBaseDogs[]>([])
   const [id, setId] = useState<number>()
-
-
-
+  const [toggle, setToggle]=useState<boolean>(false)
 
   useEffect(() => {
     const fetchDog1 = async () => {
@@ -30,6 +28,7 @@ export default function Main(): JSX.Element {
       const response = await fetch("https://dog.ceo/api/breeds/image/random");
       const jsonBody: DogInterface = await response.json();
       setDog2(jsonBody);
+
     };
     const getDataBaseDogs = async () => {
       const data: DataBaseDogs[] = await axios.get('https://tichnozar-dog-voting-app.herokuapp.com/breeds')
@@ -38,9 +37,11 @@ export default function Main(): JSX.Element {
     fetchDog1();
     fetchDog2();
     getDataBaseDogs()
-  }, []);
+  }, [toggle]);
 
   const handleVoteDog = async (link:string) => {
+    setToggle(!toggle);
+    console.log(toggle)
     const breed = getBreed(link)
     if (checkDogInDataBaseDogs(breed)){
       await axios.put(`https://git.heroku.com/tichnozar-dog-voting-app.git/breeds/${id}`, {currentVote: 90})
@@ -49,6 +50,7 @@ export default function Main(): JSX.Element {
       await axios.post('https://git.heroku.com/tichnozar-dog-voting-app.git/breeds', {dogbreed: breed})
     }
   }
+
 
   function checkDogInDataBaseDogs(breed: string){
     for (const dogObject of dataBaseDogs){
