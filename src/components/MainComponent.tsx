@@ -28,6 +28,7 @@ export default function Main(): JSX.Element {
         "https://tichnozar-dog-voting-app.herokuapp.com/breeds"
       );
       setDataBaseDogs(response.data);
+      console.log(dataBaseDogs)
     };
     fetchDog1();
     fetchDog2();
@@ -36,22 +37,21 @@ export default function Main(): JSX.Element {
 
   const handleVoteDog = async (link: string) => {
     setToggle(!toggle);
-    console.log(toggle);
     const breed = getBreed(link);
     if (checkDogInDataBaseDogs(breed)) {
       await axios.put(
         `https://tichnozar-dog-voting-app.herokuapp.com/breeds/${id}`,
         { currentVote: vote }
       );
+      console.log('this is a put req')
     } else {
       await axios.post(
         "https://tichnozar-dog-voting-app.herokuapp.com/breeds",
         { dogbreed: breed }
       );
+      console.log('this is a post req')
     }
   };
-
-  console.log(dataBaseDogs);
 
   function checkDogInDataBaseDogs(breed: string) {
     for (const dogObject of dataBaseDogs) {
@@ -87,14 +87,14 @@ export default function Main(): JSX.Element {
           {" "}
           <tr>
             <th>Dog Breed</th>
-            <th>Vote</th>
+            <th>Votes</th>
           </tr>
           {dataBaseDogs.map((dog) => (
             <tr key={dog.id}>
               <td>{dog.dogbreed}</td>
               <td>{dog.vote}</td>
             </tr>
-          ))}
+          )).slice(0,9)}
         </table>
       </div>
     </>
