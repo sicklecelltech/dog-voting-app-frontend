@@ -8,7 +8,7 @@ export default function Main(): JSX.Element {
   const [dog1, setDog1] = useState<DogInterface>({ message: "", status: "" });
   const [dog2, setDog2] = useState<DogInterface>({ message: "", status: "" });
   const [dataBaseDogs, setDataBaseDogs] = useState<DataBaseDogs[]>([]);
-  const [id, setId] = useState<number>();
+  const [id, setId] = useState<number>(1);
   const [toggle, setToggle] = useState<boolean>(false);
   const [vote, setVote] = useState<number>();
   const [userVote, setUserVote] = useState<number>(0);
@@ -40,7 +40,7 @@ export default function Main(): JSX.Element {
   const handleVoteDog = async (link: string) => {
     setToggle(!toggle);
     setUserVote(userVote + 1);
-    console.log(userVote);
+    //console.log(userVote);
     const breed = getBreed(link);
     if (checkDogInDataBaseDogs(breed)) {
       await axios.put(
