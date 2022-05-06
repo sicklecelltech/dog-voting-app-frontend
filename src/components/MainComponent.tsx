@@ -12,6 +12,7 @@ export default function Main(): JSX.Element {
   const [toggle, setToggle] = useState<boolean>(false);
   const [vote, setVote] = useState<number>();
   const [userVote, setUserVote] = useState<number>(0);
+  console.log("-----------------------------------------------------------")
 
   useEffect(() => {
     const fetchDog1 = async () => {
@@ -37,35 +38,40 @@ export default function Main(): JSX.Element {
     // eslint-disable-next-line
   }, [toggle]);
 
-  const handleVoteDog = async (link: string) => {
-    setToggle(!toggle);
-    setUserVote(userVote + 1);
-    //console.log(userVote);
-    const breed = getBreed(link);
-    if (checkDogInDataBaseDogs(breed)) {
-      await axios.put(
-        `https://tichnozar-dog-voting-app.herokuapp.com/breeds/${id}`,
-        { currentVote: vote }
-      );
-      console.log("this is a put req");
-    } else {
-      await axios.post(
-        "https://tichnozar-dog-voting-app.herokuapp.com/breeds",
-        { dogbreed: breed }
-      );
-      console.log("this is a post req");
-    }
-  };
+  console.log("This is outside", id)
 
   function checkDogInDataBaseDogs(breed: string) {
     for (const dogObject of dataBaseDogs) {
       if (dogObject.dogbreed === breed) {
+        console.log("This is in CheckDog", dogObject.id)
         setId(dogObject.id);
         setVote(dogObject.vote);
         return true;
       }
     }
   }
+
+  const handleVoteDog = async (link: string) => {
+    setToggle(!toggle);
+    setUserVote(userVote + 1);
+    //console.log(userVote);
+    const breed = getBreed(link);
+    if (checkDogInDataBaseDogs(breed)) {
+      console.log("this is a put req sending an id of:", id);
+      await axios.put(
+        `https://tichnozar-dog-voting-app.herokuapp.com/breeds/${id}`,
+        { currentVote: vote }
+      );
+    } else {
+      await axios.post(
+        "https://tichnozar-dog-voting-app.herokuapp.com/breeds",
+        { dogbreed: breed }
+      );
+      console.log("this is a post req sending a breed of", breed);
+    }
+  };
+
+
 
   return (
     <>

@@ -13,6 +13,7 @@ describe("Testing the dog app", () => {
         cy.get("img").eq(0).invoke("attr", "src").then((firstSrc) => {
             console.log("THis is cypress", firstSrc)
         })
+        cy.get(".dog").eq(0).click()
 
 
     })
