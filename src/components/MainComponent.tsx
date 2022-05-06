@@ -8,9 +8,7 @@ export default function Main(): JSX.Element {
   const [dog1, setDog1] = useState<DogInterface>({ message: "", status: "" });
   const [dog2, setDog2] = useState<DogInterface>({ message: "", status: "" });
   const [dataBaseDogs, setDataBaseDogs] = useState<DataBaseDogs[]>([]);
-  const [id, setId] = useState<number>(1);
   const [toggle, setToggle] = useState<boolean>(false);
-  const [vote, setVote] = useState<number>();
   const [userVote, setUserVote] = useState<number>(0);
   console.log("-----------------------------------------------------------")
 
@@ -38,14 +36,11 @@ export default function Main(): JSX.Element {
     // eslint-disable-next-line
   }, [toggle]);
 
-  console.log("This is outside", id)
+  //console.log("This is outside", id)
 
   function checkDogInDataBaseDogs(breed: string) {
     for (const dogObject of dataBaseDogs) {
       if (dogObject.dogbreed === breed) {
-        console.log("This is in CheckDog", dogObject.id)
-        setId(dogObject.id);
-        setVote(dogObject.vote);
         return true;
       }
     }
@@ -54,20 +49,21 @@ export default function Main(): JSX.Element {
   const handleVoteDog = async (link: string) => {
     setToggle(!toggle);
     setUserVote(userVote + 1);
-    //console.log(userVote);
     const breed = getBreed(link);
     if (checkDogInDataBaseDogs(breed)) {
-      console.log("this is a put req sending an id of:", id);
+      const currentDog = dataBaseDogs.filter(dog => dog.dogbreed === breed)[0]
+      console.log("This is the currentdog", currentDog, breed)
+      console.log("this is a put req sending an id of:", currentDog.id);
       await axios.put(
-        `https://tichnozar-dog-voting-app.herokuapp.com/breeds/${id}`,
-        { currentVote: vote }
+        `https://tichnozar-dog-voting-app.herokuapp.com/breeds/${currentDog.id}`,
+        { currentVote: currentDog.vote }
       );
     } else {
+      console.log("this is a post req sending a breed of", breed);
       await axios.post(
         "https://tichnozar-dog-voting-app.herokuapp.com/breeds",
         { dogbreed: breed }
       );
-      console.log("this is a post req sending a breed of", breed);
     }
   };
 
