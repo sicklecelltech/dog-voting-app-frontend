@@ -9,7 +9,9 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "typescript": "^4.1.2"
+    "typescript": "^4.1.2",
+    "url-loader": "^4.1.1",
+    "use-sound": "^4.0.1"
   },
   "scripts": {
     "format": "prettier --write src",
