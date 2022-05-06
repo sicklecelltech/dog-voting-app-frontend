@@ -1,11 +1,10 @@
 /// <reference types="cypress" />
 
-import { eq, xorBy } from "cypress/types/lodash"
 
 describe("Testing the dog app", () => {
     it("Visit the dog app", () => {
         cy.wait(500)
-        cy.visit("http://localhost:3000/")
+        cy.visit("http://localhost:3002/")
         cy.contains("Favourite Dog")
     })
 
@@ -24,9 +23,18 @@ describe("Testing the dog app", () => {
             console.log("This is cypress", src2)
             expect(src1).to.not.equal(src2)
         })
+    })
 
+    it("On vote click votes counter should increment", () =>{
 
-
+        cy.get('.user-vote')
+        .invoke('text')
+        .then(Number)
+        .then((n) => {
+        cy.get(".dog").eq(0).click().wait(1000)
+         // check the incremented value
+        cy.contains('.user-vote', String(n + 1))
+  })
 
     })
 })
