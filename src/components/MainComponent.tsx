@@ -63,6 +63,29 @@ export default function Main(): JSX.Element {
     }
   };
 
+  const topThreeBreedImagesPromise = dataBaseDogs.slice(0, 2).map(async (dog) => {
+    const breed = dog.dogbreed
+    let imageLink = ""
+    if (breed.includes("-")) {
+      const urlBreed = breed.replace('-', '/')
+      const response = await fetch(`https://dog.ceo/api/breed/hound/${urlBreed}/random`)
+      const jsonBody: DogInterface = await response.json();
+      imageLink = jsonBody.message
+
+    } else {
+      const response = await fetch(`https://dog.ceo/api/breed/hound/${breed}/random`)
+      const jsonBody: DogInterface = await response.json();
+      imageLink = jsonBody.message
+    }
+    return (
+      <img key={breed} src={imageLink} alt="" />
+    )
+  }
+  )
+
+
+
+
   return (
     <>
       <h1 className="main-title">🐶Your Favourite Dog App🐶</h1>
@@ -89,6 +112,7 @@ export default function Main(): JSX.Element {
             <p className="user-vote">{userVote}</p>
           </p>
         </div>
+        <p>Test</p>
         <table>
           {" "}
           <tr>
