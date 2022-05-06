@@ -10,7 +10,7 @@ export default function Main(): JSX.Element {
   const [dataBaseDogs, setDataBaseDogs] = useState<DataBaseDogs[]>([]);
   const [toggle, setToggle] = useState<boolean>(false);
   const [userVote, setUserVote] = useState<number>(0);
-  console.log("-----------------------------------------------------------")
+  //console.log("-----------------------------------------------------------")
 
   useEffect(() => {
     const fetchDog1 = async () => {
@@ -52,14 +52,14 @@ export default function Main(): JSX.Element {
     const breed = getBreed(link);
     if (checkDogInDataBaseDogs(breed)) {
       const currentDog = dataBaseDogs.filter(dog => dog.dogbreed === breed)[0]
-      console.log("This is the currentdog", currentDog, breed)
-      console.log("this is a put req sending an id of:", currentDog.id);
+      //console.log("This is the currentdog", currentDog, breed)
+      //console.log("this is a put req sending an id of:", currentDog.id);
       await axios.put(
         `https://tichnozar-dog-voting-app.herokuapp.com/breeds/${currentDog.id}`,
         { currentVote: currentDog.vote }
       );
     } else {
-      console.log("this is a post req sending a breed of", breed);
+      //console.log("this is a post req sending a breed of", breed);
       await axios.post(
         "https://tichnozar-dog-voting-app.herokuapp.com/breeds",
         { dogbreed: breed }
