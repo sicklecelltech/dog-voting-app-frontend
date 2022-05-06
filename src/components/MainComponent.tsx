@@ -83,7 +83,9 @@ export default function Main(): JSX.Element {
       </div>
       <h3 className="leaderboard-title">Leaderboard</h3>
       <div className="leaderboard-container">
-        <p className="vote-counter">{`Number of votes you have cast: ${userVote}`}</p>
+        <div>
+        <p className="vote-counter">Number of votes you have cast: <p className="user-vote">{userVote}</p></p>
+        </div>
         <table>
           {" "}
           <tr>
