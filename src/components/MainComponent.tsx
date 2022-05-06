@@ -35,7 +35,6 @@ export default function Main(): JSX.Element {
     // eslint-disable-next-line
   }, [toggle]);
 
-
   function checkDogInDataBaseDogs(breed: string) {
     for (const dogObject of dataBaseDogs) {
       if (dogObject.dogbreed === breed) {
@@ -49,7 +48,9 @@ export default function Main(): JSX.Element {
     setUserVote(userVote + 1);
     const breed = getBreed(link);
     if (checkDogInDataBaseDogs(breed)) {
-      const currentDog = dataBaseDogs.filter(dog => dog.dogbreed === breed)[0]
+      const currentDog = dataBaseDogs.filter(
+        (dog) => dog.dogbreed === breed
+      )[0];
       await axios.put(
         `https://tichnozar-dog-voting-app.herokuapp.com/breeds/${currentDog.id}`,
         { currentVote: currentDog.vote }
@@ -61,8 +62,6 @@ export default function Main(): JSX.Element {
       );
     }
   };
-
-
 
   return (
     <>
