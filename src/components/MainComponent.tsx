@@ -3,8 +3,7 @@ import axios from "axios";
 import DogInterface from "./DogInterface";
 import DataBaseDogs from "./DatabaseDogInterface";
 import getBreed from "../utils/getBreed";
-import audio from '../sounds/bite.mp3'
-
+import audio from "../sounds/bite.mp3";
 
 export default function Main(): JSX.Element {
   const [dog1, setDog1] = useState<DogInterface>({ message: "", status: "" });
@@ -14,7 +13,6 @@ export default function Main(): JSX.Element {
   const [userVote, setUserVote] = useState<number>(0);
 
   const myAudio = new Audio(audio);
-
 
   useEffect(() => {
     const fetchDog1 = async () => {
