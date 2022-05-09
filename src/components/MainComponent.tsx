@@ -66,37 +66,45 @@ export default function Main(): JSX.Element {
 
   const leaderDogs = dataBaseDogs.slice(0, 3)
   console.log("These are the leaderdogs", leaderDogs)
+
   const leaderImageLinks: string[] = []
 
   async function getLink(dog: DataBaseDogs) {
-    console.log(dog)
+    //console.log(dog)
     const breed = dog.dogbreed
 
     if (breed.includes("-")) {
       const urlBreed = breed.replace('-', '/')
-      leaderImageLinks.push(urlBreed)
-
-
+      //leaderImageLinks.push(urlBreed)
+      leaderImageLinks.push("test")
       const response = await fetch(`https://dog.ceo/api/breed/${urlBreed}/images/random`)
       const jsonBody: DogInterface = await response.json();
-
+      //console.log(jsonBody.message)
       //leaderImageLinks.push(jsonBody.message)
-      leaderImageLinks.push("test")
     } else {
-      leaderImageLinks.push(breed)
-
+      //leaderImageLinks.push(breed)
+      leaderImageLinks.push("test")
       const response = await fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
       const jsonBody: DogInterface = await response.json();
+      //console.log(jsonBody.message)
       //leaderImageLinks.push(jsonBody.message)
-      leaderImageLinks.push("test")
+
+
     }
   }
 
   for (const dog of leaderDogs) {
     getLink(dog)
+    //console.log(leaderImageLinks)
   }
 
-  console.log("Leader", leaderImageLinks[0], leaderImageLinks[1])
+  // const arrayOfImageLinks = Promise.all([leaderDogs.map(async (dog) => {
+  //   await getLink(dog)
+  // })]);
+
+  // (async () => { await arrayOfImageLinks() })()
+
+  console.log("Leader", leaderImageLinks[0], leaderImageLinks[1], leaderImageLinks[2])
 
   return (
     <>
@@ -125,7 +133,7 @@ export default function Main(): JSX.Element {
           </p>
         </div>
         <img src={leaderImageLinks[0]} alt="" />
-        <p>{leaderImageLinks[0]}</p>
+        <p>{leaderImageLinks}</p>
         <table>
           {" "}
           <tr>
