@@ -11,6 +11,8 @@ export default function Main(): JSX.Element {
   const [toggle, setToggle] = useState<boolean>(false);
   const [userVote, setUserVote] = useState<number>(0);
 
+  console.log("This is render:", Math.random())
+
   useEffect(() => {
     const fetchDog1 = async () => {
       const response = await fetch("https://dog.ceo/api/breeds/image/random");
@@ -27,7 +29,6 @@ export default function Main(): JSX.Element {
         "https://tichnozar-dog-voting-app.herokuapp.com/breeds"
       );
       setDataBaseDogs(response.data);
-      console.log(dataBaseDogs);
     };
     fetchDog1();
     fetchDog2();
@@ -63,28 +64,39 @@ export default function Main(): JSX.Element {
     }
   };
 
-  const topThreeBreedImagesPromise = dataBaseDogs.slice(0, 2).map(async (dog) => {
+  const leaderDogs = dataBaseDogs.slice(0, 3)
+  console.log("These are the leaderdogs", leaderDogs)
+  const leaderImageLinks: string[] = []
+
+  async function getLink(dog: DataBaseDogs) {
+    console.log(dog)
     const breed = dog.dogbreed
-    let imageLink = ""
+
     if (breed.includes("-")) {
       const urlBreed = breed.replace('-', '/')
-      const response = await fetch(`https://dog.ceo/api/breed/hound/${urlBreed}/random`)
-      const jsonBody: DogInterface = await response.json();
-      imageLink = jsonBody.message
+      leaderImageLinks.push(urlBreed)
 
+
+      const response = await fetch(`https://dog.ceo/api/breed/${urlBreed}/images/random`)
+      const jsonBody: DogInterface = await response.json();
+
+      //leaderImageLinks.push(jsonBody.message)
+      leaderImageLinks.push("test")
     } else {
-      const response = await fetch(`https://dog.ceo/api/breed/hound/${breed}/random`)
+      leaderImageLinks.push(breed)
+
+      const response = await fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
       const jsonBody: DogInterface = await response.json();
-      imageLink = jsonBody.message
+      //leaderImageLinks.push(jsonBody.message)
+      leaderImageLinks.push("test")
     }
-    return (
-      <img key={breed} src={imageLink} alt="" />
-    )
   }
-  )
 
+  for (const dog of leaderDogs) {
+    getLink(dog)
+  }
 
-
+  console.log("Leader", leaderImageLinks[0], leaderImageLinks[1])
 
   return (
     <>
@@ -112,7 +124,8 @@ export default function Main(): JSX.Element {
             <p className="user-vote">{userVote}</p>
           </p>
         </div>
-        <p>Test</p>
+        <img src={leaderImageLinks[0]} alt="" />
+        <p>{leaderImageLinks[0]}</p>
         <table>
           {" "}
           <tr>
