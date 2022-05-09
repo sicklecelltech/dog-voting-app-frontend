@@ -4,7 +4,7 @@
 describe("Testing the dog app", () => {
     it("Visit the dog app", () => {
         cy.wait(500)
-        cy.visit("http://localhost:3002/")
+        cy.visit("https://tichnozar-dog-voting-app.netlify.app/")
         cy.contains("Favourite Dog")
     })
 
@@ -25,16 +25,16 @@ describe("Testing the dog app", () => {
         })
     })
 
-    it("On vote click votes counter should increment", () =>{
+    it("On vote click votes counter should increment", () => {
 
         cy.get('.user-vote')
-        .invoke('text')
-        .then(Number)
-        .then((n) => {
-        cy.get(".dog").eq(0).click().wait(1000)
-         // check the incremented value
-        cy.contains('.user-vote', String(n + 1))
-  })
+            .invoke('text')
+            .then(Number)
+            .then((n) => {
+                cy.get(".dog").eq(0).click().wait(1000)
+                // check the incremented value
+                cy.contains('.user-vote', String(n + 1))
+            })
 
     })
 })
